@@ -15,8 +15,8 @@ An AutoHotkey script to automate anvil usage
 6. Select the recipe that you want to forge
 7. Press the key combination that you inputted earlier
 
-If your GUI scale is set to 1 or 2, enable the `Enter required strikes manually` checkbox
-With manual entry enabled, you will need to type in the names of the required strikes manually.
+If your GUI scale is set to 1 or 2, enable the `Enter required strikes manually` checkbox  
+With manual entry enabled, you will need to type in the names of the required strikes manually.  
 Instead of full names, you can type in only their initials (without spaces)
 
 
