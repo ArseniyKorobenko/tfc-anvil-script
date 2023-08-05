@@ -2,9 +2,10 @@
 An AutoHotkey script to automate anvil usage
 
 ## How to install
-1. Click the green `<> Code` button
-2. Click "Download ZIP"
-3. Unpack the ZIP file
+1. Go to https://github.com/teeth-eator/tfc-anvil-script
+2. Click the green `<> Code` button
+3. Click "Download ZIP"
+4. Unpack the ZIP file
 
 ## How to use
 1. Run the `anvil.exe` file
@@ -21,7 +22,7 @@ Instead of full names, you can type in only the initials (without spaces)
 
 
 ## Troubleshooting
+- Disable any resource packs that modify the anvil UI
 - Try setting a higher GUI scale. GUI scales 1 and 2 are buggy due to image compression
-- Take screenshots of the required last hits by pressing `Win + Shift + S`, trim them in Paint,  
-and replace the respective `order hit-name GUI-scale.png` file in the `img_files` folder
+- Turn on manual entry
 - If the `anvil.exe` file doesn't run, install AutoHotkey and run the `anvil.ahk` file instead
