@@ -22,6 +22,9 @@ Instead of full names, you can type in only the initials (without spaces)
 
 
 ## Troubleshooting
+If the item doesn't get forged completely, it means there's an issue.  
+Here are some ways to fix that.  
+- Download the latest version of the script from https://github.com/teeth-eator/tfc-anvil-script
 - Disable any resource packs that modify the anvil UI
 - Try setting a higher GUI scale. GUI scales 1 and 2 are buggy due to image compression
 - Turn on manual entry
