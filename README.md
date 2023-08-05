@@ -17,7 +17,7 @@ An AutoHotkey script to automate anvil usage
 
 If your GUI scale is set to 1 or 2, enable the `Enter required strikes manually` checkbox  
 With manual entry enabled, you will need to type in the names of the required strikes manually.  
-Instead of full names, you can type in only their initials (without spaces)
+Instead of full names, you can type in only the initials (without spaces)
 
 
 ## Troubleshooting
