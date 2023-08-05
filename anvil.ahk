@@ -25,6 +25,7 @@ order_gray := 0xC6C6C6
 order_frame := [[61, 7], [76, 22]]
 order_frame_stride := 19
 order_frame_icons := { 1: "order_shrink", 2: "order_upset", 3: "order_bend", 4: "order_punch", 5: "order_hit", 8: "order_draw"}
+strike_names := { "shrink": 1, "s": 1, "upset": 2, "u": 2, "bend": 3, "b": 3, "punch": 4, "p": 4, "hit": 5, "h": 5, "draw": 8, "d": 8, "none": 0, "n": 0}
 path := PathfindPremade()
 
 
@@ -33,12 +34,17 @@ path := PathfindPremade()
 Gui, Add, Text,, Minecraft must not be fullscreen`nfor the script to work!
 Gui, Add, Text,, Hotkey:
 Gui, Add, Hotkey, Vforge_hotkey
-Gui, Add, Text, ym, Minecraft GUI scale:`nHigher value provides higher accuracy.
-Gui, Add, Radio, Checked, 2
+Gui, Add, CheckBox, Vmanual_last_actions, Enter required strikes manually`n(Required with GUI scale 1 or 2)
+Gui, Add, Text, ym, Minecraft GUI scale:`nHigher value provides higher accuracy.`nIf using GUI scale 1 or 2, enable manual entry
+Gui, Add, Radio, Checked, 1
+Gui, Add, Radio,, 2
 Gui, Add, Radio,, 3
 Gui, Add, Radio, Vgui_scale, 4
 Gui, Add, Button, Default w80, Apply
 Gui, Show
+
+
+; --- UI FUNCTIONS ---
 
 GuiClose()
 {
@@ -61,7 +67,6 @@ ButtonApply()
     Gui, Flash
     Sleep 500
     Gui, Flash, Off
-    gui_scale++
     return
 }
 
@@ -75,7 +80,7 @@ HotkeyPressed()
     WinActivate
     if (Setup() != 0)
     {
-        MsgBox, 48, Error, Couldn't find the anvil GUI.
+        MsgBox, 48, Error, Couldn't find the anvil GUI. Maybe its top border is obscured?
         WinActivate
         return
     }
@@ -93,6 +98,23 @@ HotkeyPressed()
     return
 }
 
+ManualLastActions()
+{
+    global strike_names
+    last_actions := [0, 0, 0]
+    InputBox, s, Required strikes, Enter the required strikes from left to right. Example:`ndraw hit hit (OR) dhh`npunch shrink (OR) ps
+    s := Trim(s)
+    StringLower, s, s
+    if (StrLen(s) <= 3)
+        Loop, Parse, s
+            last_actions[A_Index] := (strike_names[A_LoopField])
+    else
+        Loop, Parse, s, " "
+            last_actions[A_Index] := (strike_names[A_LoopField])
+    WinActivate
+    return last_actions
+}
+
 ; --- FUNCTIONS --- 
 
 Setup()
@@ -102,11 +124,16 @@ Setup()
     return ErrorLevel
 }
 
+
 Forge(target) 
 {
     global actions
+    global manual_last_actions
     ; [1]last [2]prelast [3]preprelast
-    last_actions := GetLastActions()
+    if not manual_last_actions
+        last_actions := GetLastActions()
+    else
+        last_actions := ManualLastActions()
     last_strike_order := GetStrikeOrder()
     last_strike_order := ProcessStrikeOrder(last_strike_order)
     last := []
@@ -325,7 +352,7 @@ CrossType(matrix, row, type)
 }
 
 ; --- UNUSED ---
-/*
+
 
 join( strArray )
 {
@@ -342,7 +369,7 @@ join2D( strArray2D )
     s .= ", [" . join(array) . "]"
   return substr(s, 3)
 }
-
+/*
 Pathfind()
 {
     global actions
